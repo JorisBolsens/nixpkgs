@@ -355,7 +355,7 @@ in
         };
         kubeletClient = mkCert {
           name = "kubelet-client";
-          CN = "system:node:${top.kubelet.hostname}";
+          CN = "system:nodes:${top.kubelet.hostname}";
           fields = {
             O = "system:nodes";
           };
