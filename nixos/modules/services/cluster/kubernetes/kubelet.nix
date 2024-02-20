@@ -309,7 +309,8 @@ in
             --hairpin-mode=hairpin-veth \
             --healthz-bind-address=${cfg.healthz.bind} \
             --healthz-port=${toString cfg.healthz.port} \
-            --hostname-override=${cfg.hostname} \
+            ${optionalString (cfg.hostname != null)
+              "--hostname-override=${cfg.hostname}"} \
             --kubeconfig=${kubeconfig} \
             ${optionalString (cfg.nodeIp != null)
               "--node-ip=${cfg.nodeIp}"} \
