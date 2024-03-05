@@ -351,7 +351,7 @@ in
       };
 
       # Always include cni plugins
-      services.kubernetes.kubelet.cni.packages = [pkgs.cni-plugins pkgs.cni-plugin-flannel];
+      services.kubernetes.kubelet.cni.packages = [pkgs.cni-plugins];
 
       boot.kernelModules = ["br_netfilter" "overlay"];
 

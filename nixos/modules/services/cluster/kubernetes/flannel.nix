@@ -25,7 +25,6 @@ in
   ###### implementation
   config = mkIf cfg.enable {
     services.flannel = {
-
       enable = mkDefault true;
       network = mkDefault top.clusterCidr;
       inherit storageBackend;
@@ -33,15 +32,19 @@ in
     };
 
     services.kubernetes.kubelet = {
-      cni.config = mkDefault [{
-        name = "mynet";
-        type = "flannel";
-        cniVersion = "0.3.1";
-        delegate = {
-          isDefaultGateway = true;
-          bridge = "mynet";
+      cni = 
+        {
+          config = mkDefault [{
+            name = "mynet";
+            type = "flannel";
+            cniVersion = "0.3.1";
+            delegate = {
+              isDefaultGateway = true;
+              bridge = "mynet";
+            };
+          }];
+          packages = [pkgs.cni-plugin-flannel];
         };
-      }];
     };
 
     networking = {

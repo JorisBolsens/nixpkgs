@@ -174,7 +174,7 @@ in
       '')
       (optionalString cfg.genCfsslAPIToken ''
         if [ ! -f "${cfsslAPITokenPath}" ]; then
-          install -o cfssl -m 400 <(head -c ${toString (cfsslAPITokenLength / 2)} /dev/urandom | od -An -t x | tr -d ' ') "${cfsslAPITokenPath}"
+          ${pkgs.coreutils}/bin/install -o cfssl -m 400 <(head -c ${toString (cfsslAPITokenLength / 2)} /dev/urandom | od -An -t x | tr -d ' ') "${cfsslAPITokenPath}"
         fi
       '')]);
 
@@ -194,7 +194,7 @@ in
           ln -fs "${cfsslAPITokenPath}" "${certmgrAPITokenPath}"
         elif [ ! -f "${certmgrAPITokenPath}" ]; then
           # Don't remove the token if it already exists
-          install -m 600 /dev/null "${certmgrAPITokenPath}"
+          ${pkgs.coreutils}/bin/install -m 600 /dev/null "${certmgrAPITokenPath}"
         fi
       ''
       (optionalString (cfg.pkiTrustOnBootstrap) ''
@@ -296,7 +296,7 @@ in
           exit 1
         fi
 
-        install -m 0600 <(echo $token) ${certmgrAPITokenPath}
+        ${pkgs.coreutils}/bin/install -m 0600 <(echo $token) ${certmgrAPITokenPath}
 
         echo "Restarting certmgr..." >&1
         systemctl restart certmgr

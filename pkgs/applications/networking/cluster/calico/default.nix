@@ -1,6 +1,6 @@
-{ lib, buildGoModule, fetchFromGitHub }:
+{ lib, buildGoModule, fetchFromGitHub, pkgs }:
 
-builtins.mapAttrs (pname: { doCheck ? true, mainProgram ? pname, subPackages }: buildGoModule rec {
+builtins.mapAttrs (pname: { doCheck ? true, mainProgram ? pname, subPackages, postInstall ? null }: buildGoModule rec {
   inherit pname;
   version = "3.27.2";
 
@@ -13,9 +13,9 @@ builtins.mapAttrs (pname: { doCheck ? true, mainProgram ? pname, subPackages }: 
 
   vendorHash = "sha256-h4qTtMG4Xi6YqLMMsXZRWVVdQ3U3VrFG6bV7YDwT5Zk=";
 
-  inherit doCheck subPackages;
+  inherit doCheck subPackages postInstall;
 
-  ldflags = [ "-s" "-w" ];
+  ldflags = [ "-s" "-w"];
 
   meta = with lib; {
     homepage = "https://projectcalico.docs.tigera.io";
@@ -46,6 +46,7 @@ builtins.mapAttrs (pname: { doCheck ? true, mainProgram ? pname, subPackages }: 
     subPackages = [
       "cni-plugin/cmd/..."
     ];
+    postInstall = "${pkgs.coreutils}/bin/ln -s $out/bin/calico $out/bin/calico-ipam";
   };
   calico-kube-controllers = {
     # integration tests require network and docker
