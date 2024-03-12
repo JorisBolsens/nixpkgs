@@ -35,7 +35,7 @@ let cfg = config.services.drbd; in
       description = lib.mdDoc ''
         Whether to enable DRBD usermode_helper drbdadm
       '';
-    }
+    };
 
   };
 
