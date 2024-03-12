@@ -50,7 +50,7 @@ let cfg = config.services.drbd; in
 
     boot.kernelModules = [ "drbd" ];
 
-    boot.extraModprobeConfig = mkIf cfg.enable_helper
+    boot.extraModprobeConfig = optionalString cfg.enable_helper
       ''
         options drbd usermode_helper=/run/current-system/sw/bin/drbdadm
       '';
