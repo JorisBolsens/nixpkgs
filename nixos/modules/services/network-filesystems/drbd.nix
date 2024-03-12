@@ -29,6 +29,14 @@ let cfg = config.services.drbd; in
       '';
     };
 
+    services.drbd.enable_helper = mkOption {
+      default = true;
+      type = types.bool;
+      description = lib.mdDoc ''
+        Whether to enable DRBD usermode_helper drbdadm
+      '';
+    }
+
   };
 
 
@@ -42,7 +50,7 @@ let cfg = config.services.drbd; in
 
     boot.kernelModules = [ "drbd" ];
 
-    boot.extraModprobeConfig =
+    boot.extraModprobeConfig = mkIf cfg.enable_helper
       ''
         options drbd usermode_helper=/run/current-system/sw/bin/drbdadm
       '';
