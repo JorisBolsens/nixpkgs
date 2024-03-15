@@ -339,7 +339,7 @@ in
               "--pod-manifest-path=/etc/${manifestPath}"} \
             ${optionalString (taints != "")
               "--register-with-taints=${taints}"} \
-            --root-dir=${top.dataDir} \
+            --root-dir=/var/lib/kubelet \
             ${optionalString (cfg.verbosity != null) "--v=${toString cfg.verbosity}"} \
             ${cfg.extraOpts}
           '';
