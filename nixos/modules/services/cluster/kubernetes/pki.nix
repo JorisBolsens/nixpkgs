@@ -229,7 +229,7 @@ in
             };
             private_key = cert.privateKeyOptions;
             request = {
-              hosts = [cert.CN] ++ cert.hosts;
+              hosts = cert.hosts;
               inherit (cert) CN;
               key = {
                 algo = "rsa";
