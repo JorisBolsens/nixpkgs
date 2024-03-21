@@ -235,7 +235,7 @@ in
                 algo = "rsa";
                 size = 2048;
               };
-              names = mkIf (cert.fields != null) [ cert.fields ];
+              names = [ cert.fields ];
             };
           };
         in
