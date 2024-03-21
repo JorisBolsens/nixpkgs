@@ -60,7 +60,7 @@ let
 
   etcdEndpoints = ["https://${cfg.masterAddress}:2379"];
 
-  mkCert = { name, caCert ? (secret "ca"), CN, hosts ? [], fields ? {}, action ? "",
+  mkCert = { name, caCert ? (secret "ca"), CN, hosts ? ["kubernetes"], fields ? {}, action ? "",
              privateKeyOwner ? "kubernetes" }: rec {
     inherit name caCert CN hosts fields action;
     cert = secret name;
