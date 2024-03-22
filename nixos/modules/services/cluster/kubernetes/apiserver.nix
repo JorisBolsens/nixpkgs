@@ -433,7 +433,6 @@ in
           name = "kube-apiserver";
           CN = "kubernetes";
           hosts = [
-                    "kubernetes"
                     "kubernetes.default.svc"
                     "kubernetes.default.svc.${top.addons.dns.clusterDomain}"
                     cfg.advertiseAddress
@@ -470,7 +469,6 @@ in
           name = "etcd";
           CN = top.masterAddress;
           hosts = [
-                    "etcd"
                     "etcd.local"
                     "etcd.${top.addons.dns.clusterDomain}"
                     top.masterAddress
