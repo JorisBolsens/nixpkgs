@@ -93,7 +93,7 @@ in
         CN = "system:kube-proxy";
         hosts = [
           config.networking.fqdn
-          config.networking.hostname
+          config.networking.hostName
           ];
         action = "systemctl restart kube-proxy.service";
       };
