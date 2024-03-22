@@ -296,6 +296,7 @@ in
         description = "Kubernetes Kubelet Service";
         wantedBy = [ "kubernetes.target" ];
         after = [ "containerd.service" "network.target" "kube-apiserver.service" ];
+        environment = [ "KUBELET_LOG_LEVEL=8" ];
         path = with pkgs; [
           gitMinimal
           openssh
