@@ -91,6 +91,10 @@ in
       kubeProxyClient = top.lib.mkCert {
         name = "kube-proxy-client";
         CN = "system:kube-proxy";
+        hosts = [
+          config.networking.fqdn
+          config.networking.hostname
+          ];
         action = "systemctl restart kube-proxy.service";
       };
     };
