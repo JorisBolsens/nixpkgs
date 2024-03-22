@@ -59,6 +59,7 @@ in
       flannelClient = top.lib.mkCert {
         name = "flannel-client";
         CN = "flannel-client";
+        hosts = [ "flannel-client" ];
         action = "systemctl restart flannel.service";
       };
     };

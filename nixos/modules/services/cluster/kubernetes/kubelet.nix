@@ -363,12 +363,14 @@ in
         kubelet = mkCert {
           name = "kubelet";
           CN = top.kubelet.hostname;
+          hosts = [top.kubelet.hostname];
           action = "systemctl restart kubelet.service";
 
         };
         kubeletClient = mkCert {
           name = "kubelet-client";
           CN = "system:node:${top.kubelet.hostname}";
+          hosts = [top.kubelet.hostname];
           fields = {
             O = "system:nodes";
           };

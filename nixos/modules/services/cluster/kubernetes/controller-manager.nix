@@ -153,11 +153,13 @@ in
       controllerManager = mkCert {
         name = "kube-controller-manager";
         CN = "kube-controller-manager";
+        hosts = ["kube-controller-manager"];
         action = "systemctl restart kube-controller-manager.service";
       };
       controllerManagerClient = mkCert {
         name = "kube-controller-manager-client";
         CN = "system:kube-controller-manager";
+        hosts = ["kube-controller-manager-client"];
         action = "systemctl restart kube-controller-manager.service";
       };
     };

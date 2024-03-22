@@ -445,21 +445,25 @@ in
         apiserverProxyClient = mkCert {
           name = "kube-apiserver-proxy-client";
           CN = "front-proxy-client";
+          hosts = ["front-proxy-client"];
           action = "systemctl restart kube-apiserver.service";
         };
         apiserverKubeletClient = mkCert {
           name = "kube-apiserver-kubelet-client";
           CN = "system:kube-apiserver";
+          hosts = ["kube-apiserver"];
           action = "systemctl restart kube-apiserver.service";
         };
         apiserverEtcdClient = mkCert {
           name = "kube-apiserver-etcd-client";
           CN = "etcd-client";
+          hosts = ["etcd-client"];
           action = "systemctl restart kube-apiserver.service";
         };
         clusterAdmin = mkCert {
           name = "cluster-admin";
           CN = "cluster-admin";
+          hosts = ["cluster-admin"];
           fields = {
             O = "system:masters";
           };

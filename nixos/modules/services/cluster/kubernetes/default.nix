@@ -260,6 +260,7 @@ in {
         serviceAccount = mkCert {
           name = "service-account";
           CN = "system:service-account-signer";
+          hosts = ["service-account-signer"];
           action = ''
             systemctl reload \
               kube-apiserver.service \

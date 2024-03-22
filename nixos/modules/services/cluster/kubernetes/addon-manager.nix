@@ -161,6 +161,7 @@ in
     services.kubernetes.pki.certs = {
       addonManager = top.lib.mkCert {
         name = "kube-addon-manager";
+        hosts = ["kube-addon-manager"];
         CN = "system:kube-addon-manager";
         action = "systemctl restart kube-addon-manager.service";
       };
